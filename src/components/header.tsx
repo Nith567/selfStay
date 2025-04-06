@@ -7,6 +7,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { useEffect } from "react";
+import { Shield, Hotel, Wallet, Globe, CheckCircle } from "lucide-react";
 
 export function Header() {
   const account = useAccount();
@@ -14,36 +15,50 @@ export function Header() {
   useEffect(() => {}, []);
 
   return (
-    <header className="px-4 bg-blue-500 lg:px-6 h-20 flex items-center justify-between">
-      <div className="flex items-center">
-        <Link className="flex items-center justify-center" href="/">
-          <Image
-            src="/zkhotelimgdemo.png"
-            alt="App Logo"
-            width={50}
-            height={50}
-            priority
-          />
-          <span className="ml-2 text-2xl font-bold">selfStay</span>
-        </Link>
-      </div>
-      <div className="flex items-center space-x-4">
-        {!account?.address ? (
-          <ConnectButton />
-        ) : (
-          <>
-            <nav className="hidden md:flex gap-4 sm:gap-6">
-              <Link
-                className="text-sm font-medium hover:underline underline-offset-4"
-                href="/"
-              >
-                About
-              </Link>
-            </nav>
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-16 items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Hotel className="h-6 w-6 text-purple-600" />
+          <span className="text-xl font-bold">POLY STAY</span>
+        </div>
+        <nav className="hidden md:flex gap-6">
+          <Link
+            href="#features"
+            className="text-sm font-medium transition-colors hover:text-primary"
+          >
+            Features
+          </Link>
+          <Link
+            href="#for-owners"
+            className="text-sm font-medium transition-colors hover:text-primary"
+          >
+            For Hotel Owners
+          </Link>
+          <Link
+            href="./booking"
+            className="text-sm font-medium transition-colors hover:text-primary"
+          >
+            For Travelers
+          </Link>
+        </nav>
+        <div className="flex items-center gap-4">
+          {!account?.address ? (
             <ConnectButton />
-          </>
-        )}
-        <ModeToggle />
+          ) : (
+            <>
+              <nav className="hidden md:flex gap-4 sm:gap-6">
+                <Link
+                  className="text-sm font-medium hover:underline underline-offset-4"
+                  href="/"
+                >
+                  About
+                </Link>
+              </nav>
+              <ConnectButton /> {/* Show ConnectButton if user is connected */}
+            </>
+          )}
+          <ModeToggle />
+        </div>
       </div>
     </header>
   );

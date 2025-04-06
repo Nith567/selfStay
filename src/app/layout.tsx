@@ -4,13 +4,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Header } from "@/components/header";
-import { Toaster, toast } from "sonner";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ORA-RIDDLE-Quest",
-  description: "Contest ORA-Quest from an AI model, participate and win Big",
+  title: "self stay",
+  description: "unified payments pay at hostels and enjoy vacation",
   icons: ["/logo/logo-dark.png"],
 };
 
@@ -23,7 +23,17 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className}`}>
         <Providers>
-          <Toaster />
+          <Toaster 
+            position="top-right"
+            toastOptions={{
+              style: {
+                background: '#18181b',
+                color: '#fff',
+                border: '1px solid #27272a',
+              },
+              duration: 4000,
+            }}
+          />
           <Header />
           {children}
         </Providers>

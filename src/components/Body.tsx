@@ -1,6 +1,9 @@
-import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { HotelRegistrationDialog} from "./Dialog";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -8,56 +11,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Shield, Hotel, Wallet, Globe, CheckCircle } from "lucide-react";
+import { Header } from "@/components/header";
+export function Body() {
+  const router = useRouter();
+  function handleRedirect() {
+    router.push("competitions");
+  }
 
-export default function LandingPage() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Hotel className="h-6 w-6 text-purple-600" />
-            <span className="text-xl font-bold">POLY STAY</span>
-          </div>
-          <nav className="hidden md:flex gap-6">
-            <Link
-              href="#features"
-              className="text-sm font-medium transition-colors hover:text-primary"
-            >
-              Features
-            </Link>
-            <Link
-              href="#how-it-works"
-              className="text-sm font-medium transition-colors hover:text-primary"
-            >
-              How It Works
-            </Link>
-            <Link
-              href="#for-owners"
-              className="text-sm font-medium transition-colors hover:text-primary"
-            >
-              For Hotel Owners
-            </Link>
-            <Link
-              href="#for-travelers"
-              className="text-sm font-medium transition-colors hover:text-primary"
-            >
-              For Travelers
-            </Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <Button variant="outline" size="sm">
-              Log In
-            </Button>
-            <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
-              Sign Up
-            </Button>
-          </div>
-        </div>
-      </header>
+    <div className="flex min-h-screen flex-col bg-black">
       <main className="flex-1">
-        {/* Hero Section */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-purple-50 to-white dark:from-gray-900 dark:to-gray-950">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
@@ -69,18 +35,15 @@ export default function LandingPage() {
                 <p className="max-w-[600px] text-muted-foreground md:text-xl">
                   POLY STAY is a decentralized hotel booking platform that
                   connects travelers with hotel owners across multiple
-                  blockchains with privacy-preserving verification.
+                  blockchains with privacy selfproof zk verification.
                 </p>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Button className="bg-purple-600 hover:bg-purple-700">
-                    Book a Stay
-                  </Button>
-                  <Button variant="outline">Register Your Hotel</Button>
+                  <HotelRegistrationDialog />
                 </div>
               </div>
               <div className="relative h-[300px] lg:h-[400px] rounded-lg overflow-hidden">
                 <Image
-                  src="/placeholder.svg?height=400&width=600"
+                  src="/zkhotelimgdemo.png?height=400&width=600"
                   alt="Luxury hotel room"
                   fill
                   className="object-cover"
@@ -92,7 +55,7 @@ export default function LandingPage() {
         </section>
 
         {/* Features Section */}
-        <section id="features" className="w-full py-12 md:py-24 lg:py-32">
+        <section id="features" className=" bg-gray-800 w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -103,7 +66,7 @@ export default function LandingPage() {
                   Why Choose Self Stay?
                 </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Our platform combines the best of blockchain technology with
+                  Our platform combines the best of privacy enabling with
                   privacy-preserving verification for a seamless booking
                   experience.
                 </p>
@@ -249,19 +212,13 @@ export default function LandingPage() {
                   <li className="flex items-start gap-2">
                     <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
                     <span>
-                      Verify your identity with ZK-proofs that protect your
-                      personal information
+                      Verify your identity with Self Protocol App that protect
+                      your personal information
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                    <span>Pay with your preferred cryptocurrency</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                    <span>
-                      Access exclusive blockchain-only deals and discounts
-                    </span>
+                    <span>Pay with your preferred blockchain USDC enabled</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
@@ -295,29 +252,23 @@ export default function LandingPage() {
             <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 md:grid-cols-4">
               <Card className="flex flex-col items-center justify-center p-6">
                 <div className="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center mb-4">
-                  <span className="font-bold text-purple-600">ETH</span>
+                  <span className="font-bold text-purple-600">BS</span>
                 </div>
-                <CardTitle className="text-center">Ethereum</CardTitle>
+                <CardTitle className="text-center">BaseSepolia</CardTitle>
               </Card>
               <Card className="flex flex-col items-center justify-center p-6">
                 <div className="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center mb-4">
-                  <span className="font-bold text-purple-600">MATIC</span>
+                  <span className="font-bold text-purple-600">
+                    avalance fuji
+                  </span>
                 </div>
-                <CardTitle className="text-center">Polygon</CardTitle>
+                <CardTitle className="text-center">Avalanche Fuji</CardTitle>
               </Card>
               <Card className="flex flex-col items-center justify-center p-6">
                 <div className="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center mb-4">
-                  <span className="font-bold text-purple-600">BNB</span>
+                  <span className="font-bold text-purple-600">Sepolia</span>
                 </div>
-                <CardTitle className="text-center">
-                  Binance Smart Chain
-                </CardTitle>
-              </Card>
-              <Card className="flex flex-col items-center justify-center p-6">
-                <div className="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center mb-4">
-                  <span className="font-bold text-purple-600">SOL</span>
-                </div>
-                <CardTitle className="text-center">Solana</CardTitle>
+                <CardTitle className="text-center">Ethereum Sepolia</CardTitle>
               </Card>
             </div>
           </div>
@@ -389,3 +340,5 @@ export default function LandingPage() {
     </div>
   );
 }
+
+
